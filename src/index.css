@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cocoa-950: #1f0d04;
+  --cocoa-900: #2a1207;
+  --cocoa-800: #38190b;
+  --cocoa-700: #45200e;
+  --cream: #f8ecd7;
+  --cream-soft: #f3dfc0;
+  --coral: #e4573f;
+  --coral-deep: #c43f2b;
+  --sunshine: #f2a93b;
+  --tan: #d9a05b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cocoa-800);
+  color: var(--cream);
+  font-family: "Quicksand", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--coral);
+  color: var(--cream);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cocoa-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--coral-deep);
+  border-radius: 8px;
+  border: 2px solid var(--cocoa-900);
+}
+
+.font-display {
+  font-family: "Baloo 2", cursive;
+}
+
+@layer components {
+  .stitch {
+    border: 2px dashed rgba(248, 236, 215, 0.4);
+  }
+  .stitch-strong {
+    border: 2.5px dashed rgba(248, 236, 215, 0.55);
+  }
+
+  .card {
+    @apply stitch relative h-full w-full max-w-md rounded-3xl bg-cocoa-800/80 p-6
+      transition-colors duration-300 hover:bg-cocoa-700/70;
+  }
+  .estado-vazio {
+    @apply stitch mx-auto flex max-w-md flex-col items-center gap-3 rounded-3xl
+      bg-cocoa-800/80 p-10 text-center;
+  }
+  .btn-redondo {
+    @apply flex h-11 w-11 items-center justify-center rounded-full bg-cream
+      text-cocoa-800 shadow-soft transition-all duration-300
+      hover:-translate-y-1 hover:rotate-6 hover:bg-sunshine;
+  }
+}
+
+.sticker-shadow {
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.45));
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-12px) rotate(var(--rot, 0deg));
+  }
+}
+.animate-floaty {
+  animation: floaty 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-floaty {
+    animation: none;
+  }
+}
